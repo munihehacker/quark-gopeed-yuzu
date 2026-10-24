@@ -1,0 +1,67 @@
+{
+  "name": "quark-yuzu",
+  "author": "yuzu-neko",
+  "title": "夸克网盘下载（柚子版）",
+  "description": "把夸克分享链接直接粘贴到 Gopeed 即可解析下载；边转边删不占网盘空间；建议把连接数设为 256",
+  "icon": "icon.png",
+  "version": "1.0.0",
+  "homepage": "https://github.com/munihehacker/quark-gopeed-yuzu",
+  "repository": {
+    "url": "https://github.com/munihehacker/quark-gopeed-yuzu"
+  },
+  "scripts": [
+    {
+      "event": "onResolve",
+      "match": {
+        "urls": [
+          "*://pan.quark.cn/s/*",
+          "*://drive.quark.cn/s/*",
+          "*://quark.cn/s/*"
+        ]
+      },
+      "entry": "index.js"
+    },
+    {
+      "event": "onStart",
+      "match": {
+        "labels": [
+          "quark"
+        ]
+      },
+      "entry": "index.js"
+    }
+  ],
+  "settings": [
+    {
+      "name": "cookie",
+      "title": "夸克 Cookie",
+      "description": "浏览器登录 pan.quark.cn → F12 → Network 任选一个请求 → 复制请求头里完整的 Cookie 值粘贴到这里",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "delete_file",
+      "title": "边转边删（释放网盘空间）",
+      "description": "提取直链后立即删除转存的文件，空间不足也能下大分享",
+      "type": "string",
+      "value": "1",
+      "options": [
+        {
+          "label": "开启 (默认)",
+          "value": "1"
+        },
+        {
+          "label": "关闭",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "name": "max_file_count",
+      "title": "最大解析文件数",
+      "description": "限制单次解析的文件数量，0 = 不限",
+      "type": "number",
+      "value": "500"
+    }
+  ]
+}
